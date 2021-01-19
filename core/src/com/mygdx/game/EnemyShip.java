@@ -24,7 +24,7 @@ public class EnemyShip extends Ship {
         xPosition = spriteSpaceShip.getX();
     }
 
-    public void shoot(Array<IComponent> enemyProjectiles, SpaceShip spaceShip) {
+    public void shoot(Array<IComponent> enemyProjectiles) {
 
         timer += Gdx.graphics.getDeltaTime();
 

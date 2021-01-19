@@ -8,19 +8,15 @@ import com.badlogic.gdx.utils.Array;
 
 
 public class EnemyBomber extends EnemyShip{
+    SpaceShip spaceShip;
 
-
-    public EnemyBomber(Texture texture,float xPosition, float yPosition, IEnemyMoveStrategy moveStrategy){
+    public EnemyBomber(Texture texture,float xPosition, float yPosition, IEnemyMoveStrategy moveStrategy,SpaceShip spaceShip){
         super(texture,xPosition,yPosition, moveStrategy);
         this.shootingInterval = 3;
     }
 
-    public void update(){
-        moveStrategy.move(spriteSpaceShip);
-        xPosition = spriteSpaceShip.getX();
-    }
-
-    public void shoot(Array<IComponent> enemyProjectiles,SpaceShip spaceShip){
+    @Override
+    public void shoot(Array<IComponent> enemyProjectiles){
 
         timer += Gdx.graphics.getDeltaTime();
         if(timer >= shootingInterval) {

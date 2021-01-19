@@ -66,7 +66,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			b.update();
 
 			EnemyShip x = (EnemyShip) b;
-			x.shoot(enemyProjectiles,spaceShip);
+			x.shoot(enemyProjectiles);
 
 			if (b.getyPosition() < -1*b.getSize() ) {
 				itr.remove();
