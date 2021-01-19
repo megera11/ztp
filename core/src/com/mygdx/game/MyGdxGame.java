@@ -19,21 +19,23 @@ public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	SpaceShip spaceShip;
 	Texture laserTexture;
-	Array<EnemyShip> enemyShips = new Array<>();
+	Array<IComponent> enemyShips = new Array<>();
 	Array<IComponent> lasers = new Array<>();
 	Array<IComponent> enemyLasers = new Array<>();
 	Array<IComponent> torpedoes = new Array<>();
-
+	CollisionManager collisionManager;
 	@Override
 	public void create () {
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 		spaceShip = new SpaceShip(new Texture("spaceship.png"),w/2 -128,0);
 		laserTexture = new Texture("Laser.png");
-
 		batch = new SpriteBatch();
+
 		EasyLevelBuilder easyLevelBuilder = new EasyLevelBuilder();
 		enemyShips = easyLevelBuilder.enemyShips;
+
+		collisionManager = new CollisionManager(spaceShip,enemyShips,lasers,enemyLasers,torpedoes);
 	}
 
 	@Override
@@ -51,11 +53,12 @@ public class MyGdxGame extends ApplicationAdapter {
 			lasers.add(laser);
 		}
 
-		checkGhostsHit();
+		collisionManager.checkCollision();
 
-		for(EnemyShip x:enemyShips){
+		for(IComponent x:enemyShips){
 			x.update();
-			x.shoot(enemyLasers,torpedoes,spaceShip);
+			EnemyShip b = (EnemyShip) x;
+			b.shoot(enemyLasers,torpedoes,spaceShip);
 		}
 
 		for(Iterator<IComponent> itr = lasers.iterator(); itr.hasNext(); ) {
@@ -129,54 +132,5 @@ public class MyGdxGame extends ApplicationAdapter {
 	}
 
 
-	public void checkGhostsHit() {
 
-		Iterator<EnemyShip> iterEn = enemyShips.iterator();
-
-		while ( iterEn.hasNext() ){
-			IComponent g = iterEn.next();
-
-			//initialise the bullet iterator each time here
-			Iterator<IComponent> iterBul = lasers.iterator();
-
-			while ( iterBul.hasNext() ) {
-				IComponent b = iterBul.next();
-
-				if ( b.getSprite().getBoundingRectangle().overlaps( g.getSprite().getBoundingRectangle() ) ) {
-					Gdx.app.log("Enemy", " Hit");
-					iterBul.remove();
-					iterEn.remove();
-				}
-			}
-
-			if ( g.getSprite().getBoundingRectangle().overlaps( spaceShip.getSprite().getBoundingRectangle() ) ) {
-				Gdx.app.log("Player", " Hit");
-				iterEn.remove();
-			}
-		}
-
-		Iterator<IComponent> iterBul = enemyLasers.iterator();
-
-		while ( iterBul.hasNext() ) {
-			IComponent b = iterBul.next();
-
-			if ( b.getSprite().getBoundingRectangle().overlaps( spaceShip.getSprite().getBoundingRectangle() ) ) {
-				Gdx.app.log("Enemy", " Hit");
-				iterBul.remove();
-
-			}
-		}
-
-		Iterator<IComponent> iterTor = torpedoes.iterator();
-
-		while ( iterTor.hasNext() ) {
-			IComponent b = iterTor.next();
-
-			if ( b.getSprite().getBoundingRectangle().overlaps( spaceShip.getSprite().getBoundingRectangle() ) ) {
-				Gdx.app.log("Enemy", " Hit");
-				iterTor.remove();
-
-			}
-		}
-	}
 }

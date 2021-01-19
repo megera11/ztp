@@ -31,7 +31,6 @@ public class Ship implements IComponent {
 
     public void update(){};
 
-
     public float getxPosition(){
         return this.xPosition;
     }
@@ -48,7 +47,7 @@ public class Ship implements IComponent {
         return spriteSpaceShip;
     }
 
-    public void setxPosition(float xPosition,float yPosition){
+    public void setPosition(float xPosition,float yPosition){
         this.xPosition = xPosition;
         this.yPosition = yPosition;
     }

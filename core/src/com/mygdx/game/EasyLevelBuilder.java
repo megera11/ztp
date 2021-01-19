@@ -10,7 +10,7 @@ import java.util.Random;
 import java.util.Timer;
 
 public class EasyLevelBuilder implements ILevelBuilder {
-    public Array<EnemyShip> enemyShips = new Array<>();
+    public Array<IComponent> enemyShips = new Array<>();
     Texture texture = new Texture("EnemyLight.png");
     Random random = new Random();
     float pom = 200;
