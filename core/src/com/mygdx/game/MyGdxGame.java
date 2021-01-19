@@ -22,6 +22,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	Array<EnemyShip> enemyShips = new Array<>();
 	Array<IComponent> lasers = new Array<>();
 	Array<IComponent> enemyLasers = new Array<>();
+	Array<IComponent> torpedoes = new Array<>();
 
 	@Override
 	public void create () {
@@ -54,7 +55,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		for(EnemyShip x:enemyShips){
 			x.update();
-			x.shoot(enemyLasers);
+			x.shoot(enemyLasers,torpedoes,spaceShip);
 		}
 
 		for(Iterator<IComponent> itr = lasers.iterator(); itr.hasNext(); ) {
@@ -77,6 +78,16 @@ public class MyGdxGame extends ApplicationAdapter {
 			}
 		}
 
+		for(Iterator<IComponent> itr = torpedoes.iterator(); itr.hasNext(); ) {
+			IComponent b = itr.next();
+
+			b.update();
+
+			if (b.getyPosition() > Gdx.graphics.getHeight()) {
+				itr.remove();
+			}
+		}
+
 
 
 
@@ -89,6 +100,9 @@ public class MyGdxGame extends ApplicationAdapter {
 			x.draw(batch);
 		}
 		for(IComponent x:enemyShips){
+			x.draw(batch);
+		}
+		for(IComponent x:torpedoes){
 			x.draw(batch);
 		}
 		spaceShip.draw(batch);

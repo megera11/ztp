@@ -2,38 +2,44 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Timer;
-import javafx.concurrent.Task;
 
 public class EnemyShip extends Ship {
-    float timer= 2f;
+    float timer1 = 2f;
+    float timer2 = 4f;
     IEnemyMoveStrategy moveStrategy;
 
     Texture lasertexture;
-    public EnemyShip(Texture texture, float xPosition, float yPosition,IEnemyMoveStrategy moveStrategy) {
+    Texture missiletexture;
+
+    public EnemyShip(Texture texture, float xPosition, float yPosition, IEnemyMoveStrategy moveStrategy) {
         super(texture, xPosition, yPosition);
         this.moveStrategy = moveStrategy;
         this.lasertexture = new Texture("LaserEnemy.png");
-
+        this.missiletexture = new Texture("bonus.png");
     }
 
-    public void update(){
-       moveStrategy.move(spriteSpaceShip);
-       yPosition = spriteSpaceShip.getY();
-       xPosition = spriteSpaceShip.getX();
+    public void update() {
+        moveStrategy.move(spriteSpaceShip);
+        yPosition = spriteSpaceShip.getY();
+        xPosition = spriteSpaceShip.getX();
     }
 
-    public void shoot(Array<IComponent> laserArray){
+    public void shoot(Array<IComponent> laserArray, Array<IComponent> torpedoes, SpaceShip spaceShip) {
 
-        timer += Gdx.graphics.getDeltaTime();
-        if(timer >= 2f && yPosition < Gdx.graphics.getHeight()) {
+        timer1 += Gdx.graphics.getDeltaTime();
+        timer2 += Gdx.graphics.getDeltaTime();
+        if (timer1 >= 2f && yPosition < Gdx.graphics.getHeight() && yPosition > 0) {
 
-            timer = 0f;
-            laserArray.add(new Laser(lasertexture, xPosition +spaceShipWidth/4, yPosition,true));
-            Gdx.app.log("shoot", " Hit");
+            timer1 = 0f;
+            laserArray.add(new Laser(lasertexture, xPosition + spaceShipWidth / 4, yPosition, true));
+        }
+        if (timer2 >= 4f && yPosition < Gdx.graphics.getHeight() && yPosition > 0) {
+
+            timer2 = 0f;
+            GuidedTorpedo torpedo = new GuidedTorpedo(spaceShip, missiletexture,xPosition,yPosition);
+            torpedoes.add(torpedo);
+            spaceShip.register(torpedo);
         }
     }
 }
