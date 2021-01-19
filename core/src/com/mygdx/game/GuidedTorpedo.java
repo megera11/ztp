@@ -12,8 +12,6 @@ public class GuidedTorpedo implements IObserver, IComponent {
     private float shipY;
     private float xPosition;
     private float yPosition;
-    private float rotation;
-    private float timer;
     private float speed;
 
 
@@ -39,11 +37,11 @@ public class GuidedTorpedo implements IObserver, IComponent {
     }
 
     public void update() {
-        float distance = Math.abs(xPosition -shipX);
-        distance += Math.abs(yPosition -shipY);
+        float distance = Math.abs(xPosition - shipX) + Math.abs(yPosition - shipY);
 
-        float vx = (shipX- xPosition) * 3f/distance;
-        float vy = (shipY- yPosition) * 3f/distance;
+
+        float vx = (shipX - xPosition) * speed / distance;
+        float vy = (shipY - yPosition) * speed / distance;
         sprite.translateX(vx);
         sprite.translateY(vy);
         xPosition = sprite.getX();

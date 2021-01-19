@@ -119,6 +119,12 @@ public class MyGdxGame extends ApplicationAdapter {
 		for(IComponent x:enemyShips){
 			x.dispose();
 		}
+		for(IComponent x:torpedoes){
+			x.dispose();
+		}
+		for(IComponent x:enemyLasers){
+			x.dispose();
+		}
 
 	}
 
@@ -157,6 +163,18 @@ public class MyGdxGame extends ApplicationAdapter {
 			if ( b.getSprite().getBoundingRectangle().overlaps( spaceShip.getSprite().getBoundingRectangle() ) ) {
 				Gdx.app.log("Enemy", " Hit");
 				iterBul.remove();
+
+			}
+		}
+
+		Iterator<IComponent> iterTor = torpedoes.iterator();
+
+		while ( iterTor.hasNext() ) {
+			IComponent b = iterTor.next();
+
+			if ( b.getSprite().getBoundingRectangle().overlaps( spaceShip.getSprite().getBoundingRectangle() ) ) {
+				Gdx.app.log("Enemy", " Hit");
+				iterTor.remove();
 
 			}
 		}
