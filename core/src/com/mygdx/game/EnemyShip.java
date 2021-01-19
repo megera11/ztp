@@ -5,18 +5,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 
 public class EnemyShip extends Ship {
-    float timer1 = 2f;
-    float timer2 = 4f;
+    float timer = 2f;
+    float shootingInterval = 2f;
     IEnemyMoveStrategy moveStrategy;
-
-    Texture lasertexture;
-    Texture missiletexture;
+    Texture laserTexture;
+    Texture missileTexture;
 
     public EnemyShip(Texture texture, float xPosition, float yPosition, IEnemyMoveStrategy moveStrategy) {
         super(texture, xPosition, yPosition);
         this.moveStrategy = moveStrategy;
-        this.lasertexture = new Texture("LaserEnemy.png");
-        this.missiletexture = new Texture("bonus.png");
+        this.laserTexture = new Texture("LaserEnemy.png");
+        this.missileTexture = new Texture("bonus.png");
     }
 
     public void update() {
@@ -25,21 +24,17 @@ public class EnemyShip extends Ship {
         xPosition = spriteSpaceShip.getX();
     }
 
-    public void shoot(Array<IComponent> laserArray, Array<IComponent> torpedoes, SpaceShip spaceShip) {
+    public void shoot(Array<IComponent> enemyProjectiles, SpaceShip spaceShip) {
 
-        timer1 += Gdx.graphics.getDeltaTime();
-        timer2 += Gdx.graphics.getDeltaTime();
-        if (timer1 >= 2f && yPosition < Gdx.graphics.getHeight() && yPosition > 0) {
+        timer += Gdx.graphics.getDeltaTime();
 
-            timer1 = 0f;
-            laserArray.add(new Laser(lasertexture, xPosition + spaceShipWidth / 4, yPosition, true));
-        }
-        if (timer2 >= 4f && yPosition < Gdx.graphics.getHeight() && yPosition > 0) {
+        if (timer >= shootingInterval && yPosition < Gdx.graphics.getHeight() && yPosition > 0) {
 
-            timer2 = 0f;
-            GuidedTorpedo torpedo = new GuidedTorpedo(spaceShip, missiletexture,xPosition,yPosition);
-            torpedoes.add(torpedo);
-            spaceShip.register(torpedo);
+            timer = 0f;
+            Laser laser = new Laser(laserTexture, xPosition + spriteSpaceShip.getHeight() / 4, yPosition, true);
+            enemyProjectiles.add(laser);
+            Gdx.app.log("LightEnemy", "Shoot");
+
         }
     }
 }

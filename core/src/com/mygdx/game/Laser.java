@@ -64,4 +64,8 @@ public class Laser implements IComponent{
         return this.spriteLaser;
     }
 
+    public float getSize(){
+        return spriteLaser.getHeight();
+    }
+
 }

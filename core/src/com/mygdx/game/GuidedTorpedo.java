@@ -60,4 +60,8 @@ public class GuidedTorpedo implements IObserver, IComponent {
     public Sprite getSprite() {
         return this.sprite;
     }
+
+    public float getSize(){
+        return sprite.getHeight();
+    }
 }

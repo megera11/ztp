@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class Ship implements IComponent {
      Sprite spriteSpaceShip;
      Texture texture;
-     float spaceShipWidth;
      float xPosition;
      float yPosition;
 
@@ -15,7 +14,7 @@ public class Ship implements IComponent {
         this.texture = texture;
         this.spriteSpaceShip =new Sprite(texture);
         this.spriteSpaceShip.setPosition(xPosition,yPosition);
-        this.spaceShipWidth = spriteSpaceShip.getWidth();
+
         this.xPosition = xPosition;
         this.yPosition = yPosition;
     }
@@ -39,10 +38,6 @@ public class Ship implements IComponent {
         return this.yPosition;
     }
 
-    public float getSpaceShipWidth(){
-        return this.spaceShipWidth;
-    }
-
     public Sprite getSprite(){
         return spriteSpaceShip;
     }
@@ -50,6 +45,10 @@ public class Ship implements IComponent {
     public void setPosition(float xPosition,float yPosition){
         this.xPosition = xPosition;
         this.yPosition = yPosition;
+    }
+
+    public float getSize(){
+        return spriteSpaceShip.getHeight();
     }
 
     public void dispose(){

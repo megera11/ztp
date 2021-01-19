@@ -9,33 +9,31 @@ public class CollisionManager {
     SpaceShip spaceShip;
     Array<IComponent> enemyShips;
     Array<IComponent> lasers;
-    Array<IComponent> enemyLasers;
-    Array<IComponent> torpedoes;
+    Array<IComponent> enemyProjectiles;
+
     Iterator<IComponent> iter;
 
-    public CollisionManager(SpaceShip spaceShip, Array<IComponent> enemyShips,Array<IComponent> lasers,Array<IComponent> enemyLasers,Array<IComponent> torpedoes){
+    public CollisionManager(SpaceShip spaceShip, Array<IComponent> enemyShips,Array<IComponent> lasers,Array<IComponent> enemyProjectiles){
         this.spaceShip = spaceShip;
         this.enemyShips = enemyShips;
         this.lasers = lasers;
-        this.enemyLasers = enemyLasers;
-        this.torpedoes = torpedoes;
+        this.enemyProjectiles = enemyProjectiles;
     }
 
 
     public void checkCollision() {
-        checkBulletShipCollision();
-        checkEnemyLaserCollision();
-        checkTorpedoCollision();
+
+        checkPlayerLaserShipCollision();
+        checkEnemyProjectilesCollision();
     }
 
 
-    private void checkBulletShipCollision() {
+    private void checkPlayerLaserShipCollision() {
         iter = enemyShips.iterator();
 
         while (iter.hasNext()) {
             IComponent enemyShip = iter.next();
 
-            //initialise the bullet iterator each time here
             Iterator<IComponent> iterLas = lasers.iterator();
 
             while (iterLas.hasNext()) {
@@ -56,27 +54,15 @@ public class CollisionManager {
     }
 
 
-    private void checkTorpedoCollision() {
-        iter = torpedoes.iterator();
+
+    private void checkEnemyProjectilesCollision() {
+        iter = enemyProjectiles.iterator();
 
         while (iter.hasNext()) {
-            IComponent torpedo = iter.next();
+            IComponent enemyProjectile = iter.next();
 
-            if (torpedo.getSprite().getBoundingRectangle().overlaps(spaceShip.getSprite().getBoundingRectangle())) {
-                Gdx.app.log("Player", "Hit by torpedo");
-                iter.remove();
-            }
-        }
-    }
-
-    private void checkEnemyLaserCollision() {
-        iter = enemyLasers.iterator();
-
-        while (iter.hasNext()) {
-            IComponent enemyLaser = iter.next();
-
-            if (enemyLaser.getSprite().getBoundingRectangle().overlaps(spaceShip.getSprite().getBoundingRectangle())) {
-                Gdx.app.log("Player", " Hit by laser");
+            if (enemyProjectile.getSprite().getBoundingRectangle().overlaps(spaceShip.getSprite().getBoundingRectangle())) {
+                Gdx.app.log("Player", " Hit by projectile");
                 iter.remove();
 
             }
