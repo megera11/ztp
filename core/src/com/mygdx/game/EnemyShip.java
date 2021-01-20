@@ -15,7 +15,7 @@ public class EnemyShip extends Ship {
         super(texture, xPosition, yPosition);
         this.moveStrategy = moveStrategy;
         this.laserTexture = new Texture("LaserEnemy.png");
-        this.missileTexture = new Texture("bonus.png");
+        this.missileTexture = new Texture("kulamocy.png");
     }
 
     public void update() {

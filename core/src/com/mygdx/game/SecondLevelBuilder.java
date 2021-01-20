@@ -4,14 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 
-public class SecondLvlBuilder implements ILevelBuilder{
+public class SecondLevelBuilder implements ILevelBuilder{
 
     SpaceShip spaceShip;
     public Array<IComponent> enemyShips = new Array<>();
-    public Array<IComponent> bonuses = new Array<>();
+    public Array<IBonus> bonuses = new Array<>();
     Texture texture = new Texture("bomber.png");
 
-    public SecondLvlBuilder(SpaceShip spaceShip){
+    public SecondLevelBuilder(SpaceShip spaceShip){
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
         this.spaceShip = spaceShip;
@@ -24,7 +24,7 @@ public class SecondLvlBuilder implements ILevelBuilder{
     public Array<IComponent> getEnemies(){
         return enemyShips;
     }
-    public Array<IComponent> getBonuses(){
+    public Array<IBonus> getBonuses(){
         return bonuses;
     }
 

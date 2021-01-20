@@ -4,13 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 
-import javax.xml.soap.Text;
 import java.util.Random;
 
 public class EasyLevelBuilder implements ILevelBuilder {
     SpaceShip spaceShip;
     public Array<IComponent> enemyShips = new Array<>();
-    public Array<IComponent> bonuses = new Array<>();
+    public Array<IBonus> bonuses = new Array<>();
     Texture enemyLightTexture = new Texture("EnemyLight.png");
     Texture bonusTexture = new Texture("bonus.png");
     Random random = new Random();
@@ -42,12 +41,14 @@ public class EasyLevelBuilder implements ILevelBuilder {
 
         }
 
-            bonuses.add(new Bonus(bonusTexture,pom,800,spaceShip,new SimpleMoveStrategy()));
+            IBonus bonus = new Bonus(bonusTexture,pom,800,spaceShip,new SimpleMoveStrategy());
+            bonuses.add(new HpDecorator(bonus));
+
     }
     public Array<IComponent> getEnemies(){
         return enemyShips;
     }
-    public Array<IComponent> getBonuses(){
+    public Array<IBonus> getBonuses(){
         return bonuses;
     }
 

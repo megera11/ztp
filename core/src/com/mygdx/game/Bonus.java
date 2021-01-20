@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class Bonus implements IComponent{
+public class Bonus implements IComponent,IBonus{
     Sprite spriteBonus;
     Texture texture;
     SpaceShip spaceShip;
@@ -15,6 +15,7 @@ public class Bonus implements IComponent{
     public Bonus(Texture texture, float x, float y, SpaceShip spaceShip, IMoveStrategy moveStrategy){
         this.texture = texture;
         this.spriteBonus = new Sprite(texture);
+        this.spriteBonus.setPosition(x,y);
         this.spaceShip = spaceShip;
         this.xPosition = x;
         this.yPosition = y;
@@ -45,5 +46,9 @@ public class Bonus implements IComponent{
 
    public  float getSize(){
         return spriteBonus.getHeight();
+   }
+
+   public void modify(SpaceShip spaceShip){
+
    }
 }

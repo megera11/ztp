@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Array;
 public interface ILevelBuilder {
 
      Array<IComponent> getEnemies();
-     Array<IComponent> getBonuses();
+     Array<IBonus> getBonuses();
 
 
 }

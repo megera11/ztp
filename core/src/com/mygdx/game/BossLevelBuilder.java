@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class BossLevelBuilder implements ILevelBuilder{
     public Array<IComponent> enemyShips = new Array<>();
-    public Array<IComponent> bonuses = new Array<>();
+    public Array<IBonus> bonuses = new Array<>();
     public BossEnemy bossEnemy;
     Texture texture = new Texture("Boss.png");
 
@@ -20,7 +20,7 @@ public class BossLevelBuilder implements ILevelBuilder{
     public Array<IComponent> getEnemies(){
         return enemyShips;
     }
-    public Array<IComponent> getBonuses(){
+    public Array<IBonus> getBonuses(){
         return bonuses;
     }
 

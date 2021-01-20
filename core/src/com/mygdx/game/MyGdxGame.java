@@ -18,7 +18,7 @@ public class MyGdxGame extends Game {
 	Array<IComponent> enemyShips = new Array<>();
 	Array<IComponent> lasers = new Array<>();
 	Array<IComponent> enemyProjectiles = new Array<>();
-	Array<IComponent> bonuses = new Array<>();
+	Array<IBonus> bonuses = new Array<>();
 
 	CollisionManager collisionManager;
 
@@ -32,11 +32,11 @@ public class MyGdxGame extends Game {
 
 		batch = new SpriteBatch();
 
-		ILevelBuilder builder = new SecondLvlBuilder(spaceShip);
+		ILevelBuilder builder = new EasyLevelBuilder(spaceShip);
 		enemyShips = builder.getEnemies();
 		bonuses = builder.getBonuses();
 
-		collisionManager = new CollisionManager(spaceShip,enemyShips,lasers,enemyProjectiles);
+		collisionManager = new CollisionManager(spaceShip,enemyShips,lasers,enemyProjectiles,bonuses);
 	}
 
 	@Override
@@ -90,6 +90,16 @@ public class MyGdxGame extends Game {
 			}
 		}
 
+		for(Iterator<IBonus> itr = bonuses.iterator(); itr.hasNext(); ) {
+			IComponent b = itr.next();
+
+			b.update();
+
+			if (b.getyPosition() < -1*b.getSize() ) {
+				itr.remove();
+			}
+		}
+
 
 		batch.begin();
 		for(IComponent x:lasers){
@@ -99,6 +109,9 @@ public class MyGdxGame extends Game {
 			x.draw(batch);
 		}
 		for(IComponent x:enemyProjectiles){
+			x.draw(batch);
+		}
+		for(IComponent x:bonuses){
 			x.draw(batch);
 		}
 

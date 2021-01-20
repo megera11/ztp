@@ -1,20 +1,18 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SpaceShip extends Ship implements  IObservable{
 
-    private int hp;
+    private int HP;
     private List<IObserver> observers = new ArrayList<IObserver>();
 
     public SpaceShip(Texture texture, float xPosition, float yPosition) {
         super(texture, xPosition, yPosition);
-
+        this.HP = 5;
     }
 
     public void move(float speed,boolean direction){
@@ -29,12 +27,14 @@ public class SpaceShip extends Ship implements  IObservable{
         }
     }
 
-    public int  getHp(){
-        return this.hp;
+    public int getHP(){
+        return HP;
     }
 
-    public void setHp(int dmg){
-        hp=hp-dmg;
+    public void changeHP(int value) {HP = HP + value;}
+
+    public void damage(int dmg){
+        HP = HP -dmg;
     }
 
     public void register(IObserver observer){
