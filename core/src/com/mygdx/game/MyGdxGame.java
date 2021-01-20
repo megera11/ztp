@@ -32,7 +32,7 @@ public class MyGdxGame extends Game {
 
 		batch = new SpriteBatch();
 
-		ILevelBuilder builder = new EasyLevelBuilder(spaceShip);
+		ILevelBuilder builder = new SecondLvlBuilder(spaceShip);
 		enemyShips = builder.getEnemies();
 		bonuses = builder.getBonuses();
 

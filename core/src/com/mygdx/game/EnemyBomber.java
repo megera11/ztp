@@ -7,14 +7,13 @@ import com.badlogic.gdx.utils.Array;
 
 public class EnemyBomber extends EnemyShip{
     SpaceShip spaceShip;
-    CareTaker careTaker;
+    Caretaker careTaker;
 
     public EnemyBomber(Texture texture, float xPosition, float yPosition, IMoveStrategy moveStrategy, SpaceShip spaceShip){
         super(texture,xPosition,yPosition, moveStrategy);
         this.shootingInterval = 3;
         this.spaceShip = spaceShip;
-        careTaker = new CareTaker();
-        save();
+        careTaker = new Caretaker();
     }
 
     @Override
@@ -34,25 +33,14 @@ public class EnemyBomber extends EnemyShip{
     @Override
     public void update() {
 
-        if(xPosition<0){
-            restore(careTaker.getMemento());
-            yPosition = spriteSpaceShip.getY();
-            xPosition = spriteSpaceShip.getX();
 
-        }else {
 
             moveStrategy.move(spriteSpaceShip);
             yPosition = spriteSpaceShip.getY();
             xPosition = spriteSpaceShip.getX();
-        }
+
     }
 
-    public Memento save(){
-        return new Memento(spriteSpaceShip);
-    }
 
-    public void restore(Memento m){
-      spriteSpaceShip = m.getSprite();
-    }
 
 }

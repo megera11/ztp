@@ -3,15 +3,15 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
 
-public class CareTaker {
+public class Caretaker {
 
-    private Memento memento = new Memento(new Sprite());
+    private Array<Memento> mementos = new Array<>();
 
     public void addMemento(Memento m) {
-        memento = m;
+        mementos.add(m);
     }
 
     public Memento getMemento() {
-        return memento;
+        return mementos.get(0);
     }
 }

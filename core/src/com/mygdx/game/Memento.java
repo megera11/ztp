@@ -3,13 +3,13 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Memento {
-    private Sprite sprite;
+    private float xPosition;
 
-    public Memento(Sprite sprite){
-        this.sprite = sprite;
+    public Memento(float xPosition){
+        this.xPosition=xPosition;
     }
 
-    public Sprite getSprite(){
-        return sprite;
+    public float getxPosition(){
+        return xPosition;
     }
 }

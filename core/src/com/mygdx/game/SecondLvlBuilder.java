@@ -16,9 +16,9 @@ public class SecondLvlBuilder implements ILevelBuilder{
         float h = Gdx.graphics.getHeight();
         this.spaceShip = spaceShip;
 
-        enemyShips.add(new EnemyBomber(texture, w/2, 500, new MovingLeftStrategy(),spaceShip));
-        enemyShips.add(new EnemyBomber(texture, w/2, 400, new MovingLeftStrategy(),spaceShip));
-        enemyShips.add(new EnemyBomber(texture, w/2, 600, new MovingLeftStrategy(),spaceShip));
+        enemyShips.add(new EnemyBomber(texture, 1200, 500, new MovingLeftStrategy(),spaceShip));
+        enemyShips.add(new EnemyBomber(texture, 1200, 400, new MovingLeftStrategy(),spaceShip));
+        enemyShips.add(new EnemyBomber(texture, 1200, 600, new MovingLeftStrategy(),spaceShip));
     }
 
     public Array<IComponent> getEnemies(){
