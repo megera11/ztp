@@ -9,10 +9,14 @@ import com.badlogic.gdx.utils.Array;
 
 public class EnemyBomber extends EnemyShip{
     SpaceShip spaceShip;
+    CareTaker careTaker;
 
     public EnemyBomber(Texture texture,float xPosition, float yPosition, IEnemyMoveStrategy moveStrategy,SpaceShip spaceShip){
         super(texture,xPosition,yPosition, moveStrategy);
         this.shootingInterval = 3;
+        this.spaceShip = spaceShip;
+        careTaker = new CareTaker();
+        save();
     }
 
     @Override
@@ -28,4 +32,29 @@ public class EnemyBomber extends EnemyShip{
             Gdx.app.log("Bomber", "Shoot");
         }
     }
+
+    @Override
+    public void update() {
+
+        if(xPosition<0){
+            restore(careTaker.getMemento());
+            yPosition = spriteSpaceShip.getY();
+            xPosition = spriteSpaceShip.getX();
+
+        }else {
+
+            moveStrategy.move(spriteSpaceShip);
+            yPosition = spriteSpaceShip.getY();
+            xPosition = spriteSpaceShip.getX();
+        }
+    }
+
+    public Memento save(){
+        return new Memento(spriteSpaceShip);
+    }
+
+    public void restore(Memento m){
+      spriteSpaceShip = m.getSprite();
+    }
+
 }

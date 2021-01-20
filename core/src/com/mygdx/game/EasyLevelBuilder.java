@@ -39,4 +39,8 @@ public class EasyLevelBuilder implements ILevelBuilder {
 
         }
     }
+
+    public Array<IComponent>  getComponents(){
+        return enemyShips;
+    }
 }

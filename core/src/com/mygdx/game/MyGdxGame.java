@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -13,9 +14,10 @@ import com.badlogic.gdx.utils.Array;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.IllformedLocaleException;
 import java.util.Iterator;
 
-public class MyGdxGame extends ApplicationAdapter {
+public class MyGdxGame extends Game {
 	SpriteBatch batch;
 	SpaceShip spaceShip;
 	Texture laserTexture;
@@ -36,8 +38,8 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		batch = new SpriteBatch();
 
-		EasyLevelBuilder easyLevelBuilder = new EasyLevelBuilder();
-		enemyShips = easyLevelBuilder.enemyShips;
+		ILevelBuilder builder = new SecondLvlBuilder(spaceShip);
+		enemyShips = builder.getComponents();
 
 
 		collisionManager = new CollisionManager(spaceShip,enemyShips,lasers,enemyProjectiles);
