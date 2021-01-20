@@ -1,20 +1,13 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.IllformedLocaleException;
 import java.util.Iterator;
 
 public class MyGdxGame extends Game {
@@ -25,6 +18,7 @@ public class MyGdxGame extends Game {
 	Array<IComponent> enemyShips = new Array<>();
 	Array<IComponent> lasers = new Array<>();
 	Array<IComponent> enemyProjectiles = new Array<>();
+	Array<IComponent> bonuses = new Array<>();
 
 	CollisionManager collisionManager;
 
@@ -38,9 +32,9 @@ public class MyGdxGame extends Game {
 
 		batch = new SpriteBatch();
 
-		ILevelBuilder builder = new SecondLvlBuilder(spaceShip);
-		enemyShips = builder.getComponents();
-
+		ILevelBuilder builder = new EasyLevelBuilder(spaceShip);
+		enemyShips = builder.getEnemies();
+		bonuses = builder.getBonuses();
 
 		collisionManager = new CollisionManager(spaceShip,enemyShips,lasers,enemyProjectiles);
 	}
@@ -107,6 +101,7 @@ public class MyGdxGame extends Game {
 		for(IComponent x:enemyProjectiles){
 			x.draw(batch);
 		}
+
 		spaceShip.draw(batch);
 		batch.end();
 

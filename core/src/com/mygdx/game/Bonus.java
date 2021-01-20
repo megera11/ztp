@@ -8,10 +8,17 @@ public class Bonus implements IComponent{
     Sprite spriteBonus;
     Texture texture;
     SpaceShip spaceShip;
-    public Bonus(Texture texture,int x,SpaceShip spaceShip){
+    IMoveStrategy moveStrategy;
+    float xPosition;
+    float yPosition;
+
+    public Bonus(Texture texture, float x, float y, SpaceShip spaceShip, IMoveStrategy moveStrategy){
         this.texture = texture;
         this.spriteBonus = new Sprite(texture);
         this.spaceShip = spaceShip;
+        this.xPosition = x;
+        this.yPosition = y;
+        this.moveStrategy = moveStrategy;
     }
 
    public  void draw(Batch batch){
@@ -19,7 +26,9 @@ public class Bonus implements IComponent{
    }
 
    public void update(){
-
+        moveStrategy.move(spriteBonus);
+        yPosition = spriteBonus.getY();
+        xPosition = spriteBonus.getX();
    }
 
    public  float getyPosition(){
@@ -35,6 +44,6 @@ public class Bonus implements IComponent{
    }
 
    public  float getSize(){
-        return 0;
+        return spriteBonus.getHeight();
    }
 }

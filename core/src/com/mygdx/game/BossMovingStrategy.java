@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class BossMovingStrategy implements IEnemyMoveStrategy{
+public class BossMovingStrategy implements IMoveStrategy {
 
     private boolean direction = false;
     private float approachSpeed = 1f;

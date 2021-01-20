@@ -4,20 +4,23 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import javax.xml.soap.Text;
 import java.util.Random;
-import java.util.Timer;
 
 public class EasyLevelBuilder implements ILevelBuilder {
+    SpaceShip spaceShip;
     public Array<IComponent> enemyShips = new Array<>();
-    Texture texture = new Texture("EnemyLight.png");
+    public Array<IComponent> bonuses = new Array<>();
+    Texture enemyLightTexture = new Texture("EnemyLight.png");
+    Texture bonusTexture = new Texture("bonus.png");
     Random random = new Random();
     float pom = 200;
 
-    public EasyLevelBuilder() {
+    public EasyLevelBuilder(SpaceShip spaceShip) {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
+
+        this.spaceShip = spaceShip;
         for (int j = 0; j < 10; j++) {
             random = new Random();
             float offset1 = 800 + j * 350;
@@ -29,18 +32,24 @@ public class EasyLevelBuilder implements ILevelBuilder {
 
 
             Float wrand = 70 + random.nextFloat() * pom;
-            enemyShips.add(new EnemyShip(texture, wrand, hrand, new SimpleMoveStrategy()));
+            enemyShips.add(new EnemyShip(enemyLightTexture, wrand, hrand, new SimpleMoveStrategy()));
             Float wrand1 = 350 + random.nextFloat() * pom;
-            enemyShips.add(new EnemyShip(texture, wrand1, hrand1, new SimpleMoveStrategy()));
+            enemyShips.add(new EnemyShip(enemyLightTexture, wrand1, hrand1, new SimpleMoveStrategy()));
             Float wrand2 = 650 + random.nextFloat() * pom;
-            enemyShips.add(new EnemyShip(texture, wrand2, hrand2, new SimpleMoveStrategy()));
+            enemyShips.add(new EnemyShip(enemyLightTexture, wrand2, hrand2, new SimpleMoveStrategy()));
             Float wrand3 = 950 + random.nextFloat() * pom;
-            enemyShips.add(new EnemyShip(texture, wrand3, hrand3, new SimpleMoveStrategy()));
+            enemyShips.add(new EnemyShip(enemyLightTexture, wrand3, hrand3, new SimpleMoveStrategy()));
 
         }
-    }
 
-    public Array<IComponent>  getComponents(){
+            bonuses.add(new Bonus(bonusTexture,pom,800,spaceShip,new SimpleMoveStrategy()));
+    }
+    public Array<IComponent> getEnemies(){
         return enemyShips;
     }
+    public Array<IComponent> getBonuses(){
+        return bonuses;
+    }
+
+
 }

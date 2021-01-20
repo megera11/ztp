@@ -2,13 +2,12 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 public class BossEnemy extends EnemyShip{
 
 
-    public BossEnemy(Texture texture, float xPosition, float yPosition, IEnemyMoveStrategy moveStrategy){
+    public BossEnemy(Texture texture, float xPosition, float yPosition, IMoveStrategy moveStrategy){
         super(texture,xPosition,yPosition, moveStrategy);
     }
 

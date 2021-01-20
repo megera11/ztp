@@ -8,6 +8,7 @@ public class SecondLvlBuilder implements ILevelBuilder{
 
     SpaceShip spaceShip;
     public Array<IComponent> enemyShips = new Array<>();
+    public Array<IComponent> bonuses = new Array<>();
     Texture texture = new Texture("bomber.png");
 
     public SecondLvlBuilder(SpaceShip spaceShip){
@@ -20,8 +21,11 @@ public class SecondLvlBuilder implements ILevelBuilder{
         enemyShips.add(new EnemyBomber(texture, w/2, 600, new MovingLeftStrategy(),spaceShip));
     }
 
-    public Array<IComponent>  getComponents(){
+    public Array<IComponent> getEnemies(){
         return enemyShips;
+    }
+    public Array<IComponent> getBonuses(){
+        return bonuses;
     }
 
 }
