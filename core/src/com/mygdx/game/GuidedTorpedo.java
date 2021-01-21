@@ -3,6 +3,9 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.mygdx.game.IComponent;
+import com.mygdx.game.Ship;
+import com.mygdx.game.IObserver;
 
 public class GuidedTorpedo implements IObserver, IComponent {
     private Sprite sprite;

@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class MovingLeftStrategy implements IMoveStrategy {
+public class SideMovingStrategy implements IMoveStrategy {
 
 
 
@@ -13,7 +13,7 @@ public class MovingLeftStrategy implements IMoveStrategy {
     public Sprite move(Sprite sprite){
 
         originator.setxPosition(sprite.getX());
-        if(sprite.getX() == 1200+i) {
+        if(sprite.getX() == sprite.getX()+i) {
             caretaker.addMemento(originator.save());
             i++;
         }

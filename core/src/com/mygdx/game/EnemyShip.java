@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 
 public class EnemyShip extends Ship {
-    float timer = 2f;
-    float shootingInterval = 2f;
+    float timer ;
+    float shootingInterval;
     IMoveStrategy moveStrategy;
     Texture laserTexture;
     Texture missileTexture;
@@ -16,6 +16,8 @@ public class EnemyShip extends Ship {
         this.moveStrategy = moveStrategy;
         this.laserTexture = new Texture("LaserEnemy.png");
         this.missileTexture = new Texture("kulamocy.png");
+        this.timer = 2f;
+        this.shootingInterval = 2f;
     }
 
     public void update() {

@@ -25,8 +25,8 @@ public class Score {
 
     public void savetofile() {
         FileHandle file = Gdx.files.local("scores.txt");
-        String text = nickname + " " + Integer.toString(score) + "\n" + file.readString();
-        file.writeString(text, false);
+        String text = nickname + " " + Integer.toString(score) + "\n";
+        file.writeString(text, true);
 
     }
 

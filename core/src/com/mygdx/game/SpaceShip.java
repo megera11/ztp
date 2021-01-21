@@ -1,16 +1,14 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpaceShip extends Ship implements  IObservable{
+public class SpaceShip extends Ship implements IObservable {
 
     private int HP;
     private float fireTimer;
@@ -33,11 +31,11 @@ public class SpaceShip extends Ship implements  IObservable{
 
     public void move(float speed,boolean direction){
         if(direction){
-            spriteShip.translateX(-10.0f);
+            spriteShip.translateX(speed);
             xPosition = spriteShip.getX();
             notifyObservers();
         }else {
-            spriteShip.translateX(10.0f);
+            spriteShip.translateX(speed);
             xPosition = spriteShip.getX();
             notifyObservers();
         }

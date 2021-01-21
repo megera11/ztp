@@ -28,9 +28,9 @@ public class SecondLevelBuilder implements ILevelBuilder{
             Float hrand = (1200+i*350) + random.nextFloat() * ((1800+i*350) - (1200+i*350));
             Float hrand1 = (1600+i*350) + random.nextFloat() * ((2200+i*350) - (1600+i*350));
             Float hrand2 = (1400+i*350) + random.nextFloat() * ((2000+i*350) - (1400+i*350));
-            enemyShips.add(new EnemyBomber(texture, hrand, y1, new MovingLeftStrategy(), spaceShip));
-            enemyShips.add(new EnemyBomber(texture, hrand1, y2, new MovingLeftStrategy(), spaceShip));
-            enemyShips.add(new EnemyBomber(texture, hrand2, y3, new MovingLeftStrategy(), spaceShip));
+            enemyShips.add(new EnemyBomber(texture, hrand, y1, new SideMovingStrategy(), spaceShip));
+            enemyShips.add(new EnemyBomber(texture, hrand1, y2, new SideMovingStrategy(), spaceShip));
+            enemyShips.add(new EnemyBomber(texture, hrand2, y3, new SideMovingStrategy(), spaceShip));
         }
 
         IBonus bonus = new Bonus(bonusTexture,200,1500,spaceShip,new SimpleMoveStrategy());
