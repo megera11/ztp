@@ -23,4 +23,10 @@ public class AliensGame extends Game {
 		setScreen(new MenuScreen(this));
 	}
 
+	@Override
+	public void dispose() {
+		super.dispose();
+		batch.dispose();
+		font.dispose();
+	}
 }

@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
@@ -18,6 +19,7 @@ public class GameScreen extends ScreenAdapter {
     Array<IComponent> enemyProjectiles = new Array<>();
     Array<IBonus> bonuses = new Array<>();
     SpriteBatch batch;
+
     Score score;
 
     CollisionManager collisionManager;
@@ -30,6 +32,7 @@ public class GameScreen extends ScreenAdapter {
 
         this.game = game;
         score = new Score(nickname);
+
         spaceShip = new SpaceShip(new Texture("spaceship.png"),w/2 -128,0);
         collisionManager = new CollisionManager(spaceShip,enemyShips,lasers,enemyProjectiles,bonuses,score);
         lvlManager = new LvlManager(lasers,enemyShips,bonuses,game,nickname,spaceShip,score);
@@ -94,7 +97,7 @@ public class GameScreen extends ScreenAdapter {
 
             b.update();
 
-            if (b.getyPosition() > Gdx.graphics.getHeight()) {
+            if (b.getyPosition() > Gdx.graphics.getHeight()-b.getSize()) {
                 itr.remove();
             }
         }
@@ -121,6 +124,7 @@ public class GameScreen extends ScreenAdapter {
 
 
         batch.begin();
+        game.font.draw(batch, "Score: " + score.getScore(), Gdx.graphics.getWidth()-200, 20);
         for(IComponent x:lasers){
             x.draw(batch);
         }

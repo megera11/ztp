@@ -17,7 +17,7 @@ public class Score {
         this.nickname = nickname;
     }
 
-    public void printRanking(AliensGame game) {
+    public static void printRanking(AliensGame game) {
         FileHandle file = Gdx.files.internal("scores.txt");
         game.font.draw(game.batch, "Ranking:", Gdx.graphics.getWidth() / 2, 450);
         game.font.draw(game.batch, file.readString(), Gdx.graphics.getWidth() / 2, 400);

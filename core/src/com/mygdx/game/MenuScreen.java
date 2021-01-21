@@ -50,7 +50,7 @@ public class MenuScreen extends ScreenAdapter {
         newgamebutton.addListener(new ChangeListener() {
             @Override
             public void changed (ChangeEvent event, Actor actor) {
-                game.setScreen(new GameScreen(game, "JacekPlacek"));
+                game.setScreen(new NickNameScreen(game));
             }
         });
         rankingbutton.addListener(new ChangeListener() {
