@@ -11,18 +11,15 @@ import java.io.File;
 public class DesktopLauncher {
 
 
-
+	//Klasa ropoczynająca nasz program
+	//
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.height = 720;
 		config.width = 1280;
 		config.forceExit = false;
 		config.resizable = false;
-		File file = new File("scores.txt");
-		if(!file.exists()){
-			FileHandle fileHandle = Gdx.files.local("scores.txt");
-			fileHandle.writeString("", false);
-		}
+
 		new LwjglApplication(new AliensGame(), config);
 	}
 }

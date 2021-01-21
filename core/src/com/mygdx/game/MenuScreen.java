@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -11,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+
+import java.io.File;
 
 public class MenuScreen extends ScreenAdapter {
     AliensGame game;
@@ -29,6 +32,12 @@ public class MenuScreen extends ScreenAdapter {
 
     @Override
     public void show(){
+
+        File file = new File("scores.txt");
+        if(!file.exists()){
+            FileHandle fileHandle = Gdx.files.local("scores.txt");
+            fileHandle.writeString("", false);
+        }
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         style = new TextButtonStyle();
