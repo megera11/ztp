@@ -93,6 +93,14 @@ public class SpaceShip extends Ship implements  IObservable{
         }
     }
 
+    public float getFireDelay(){
+        return this.fireDelay;
+    }
+
+    public void setFireDelay(float fireDelay){
+        this.fireDelay = fireDelay;
+    }
+
 
 
 }

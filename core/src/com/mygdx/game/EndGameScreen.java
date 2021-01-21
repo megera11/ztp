@@ -9,9 +9,14 @@ import com.badlogic.gdx.graphics.GL20;
 public class EndGameScreen extends ScreenAdapter {
 
     AliensGame game;
+    private int score;
+    private boolean win;
 
-    public EndGameScreen(AliensGame game){
+
+    public EndGameScreen(AliensGame game,int score,boolean win){
         this.game = game;
+        this.score = score;
+        this.win = win;
     }
 
     @Override

@@ -39,7 +39,7 @@ public class EasyLevelBuilder implements ILevelBuilder {
         }
 
         IBonus bonus = new Bonus(bonusTexture, pom, 1500, spaceShip, new SimpleMoveStrategy());
-        bonuses.add(new HpDecorator(bonus));
+        bonuses.add(new ShootIntervalDecorator(bonus));
         bonus = new Bonus(bonusTexture, 400, 3000, spaceShip, new SimpleMoveStrategy());
         bonuses.add(new HpDecorator(bonus));
         bonus = new Bonus(bonusTexture, 600, 4500, spaceShip, new SimpleMoveStrategy());

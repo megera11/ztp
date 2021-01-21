@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 public class CollisionManager {
     SpaceShip spaceShip;
+    Score score;
     Array<IComponent> enemyShips;
     Array<IComponent> lasers;
     Array<IComponent> enemyProjectiles;
@@ -15,25 +16,27 @@ public class CollisionManager {
     Iterator<IComponent> iterComp;
     Iterator<IBonus> iterBon;
 
-    public CollisionManager(SpaceShip spaceShip, Array<IComponent> enemyShips,Array<IComponent> lasers,Array<IComponent> enemyProjectiles,Array<IBonus> bonuses){
+    public CollisionManager(SpaceShip spaceShip, Array<IComponent> enemyShips,Array<IComponent> lasers,Array<IComponent> enemyProjectiles,Array<IBonus> bonuses,Score score){
         this.spaceShip = spaceShip;
         this.enemyShips = enemyShips;
         this.lasers = lasers;
         this.enemyProjectiles = enemyProjectiles;
         this.bonuses = bonuses;
+        this.score = score;
     }
 
 
     public void checkCollision() {
 
-        checkPlayerProjectilesShipCollision();
+        checkPlayerProjectilesCollision();
+        checkPlayerShipCollision();
         checkEnemyProjectilesCollisions();
         checkPlayerProjectileCollisions();
         checkBonusCollision();
     }
 
 
-    private void checkPlayerProjectilesShipCollision() {
+    private void checkPlayerProjectilesCollision() {
         iterComp = enemyShips.iterator();
 
         while (iterComp.hasNext()) {
@@ -52,8 +55,19 @@ public class CollisionManager {
                         return;
                     }
                     iterComp.remove();
+                    score.increasescore();
                 }
             }
+
+
+        }
+    }
+
+    private void checkPlayerShipCollision(){
+        iterComp = enemyShips.iterator();
+
+        while (iterComp.hasNext()) {
+            IComponent enemyShip = iterComp.next();
 
             if (enemyShip.getSprite().getBoundingRectangle().overlaps(spaceShip.getSprite().getBoundingRectangle())) {
                 Gdx.app.log("Player", " Hit by ship");

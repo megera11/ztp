@@ -8,20 +8,19 @@ public class LvlManager {
     private AliensGame game;
     private float timer;
     private SpaceShip spaceShip;
-    private String nickname;
     private Array<IComponent> lasers;
     private Array<IComponent> enemies;
     private Array<IBonus> bonuses;
     private boolean buildinprogress = false;
     private int currentLevel = 1;
     private LevelBuilderDirector director = new LevelBuilderDirector();
-    Array<IComponent> components = new Array<>();
+    private Score score;
 
-    public LvlManager(Array<IComponent> lasers, Array<IComponent> enemies, Array<IBonus> bonuses, AliensGame game, String nickname, SpaceShip spaceShip){
+    public LvlManager(Array<IComponent> lasers, Array<IComponent> enemies, Array<IBonus> bonuses, AliensGame game, String nickname, SpaceShip spaceShip,Score score){
         this.lasers = lasers;
         this.enemies = enemies;
         this.game = game;
-        this.nickname = nickname;
+        this.score = score;
         this.spaceShip = spaceShip;
         this.bonuses = bonuses;
         this.timer = 0f;
@@ -33,7 +32,8 @@ public class LvlManager {
 
         if(enemies.size == 0 && buildinprogress==false){
             if(currentLevel==4){
-                game.setScreen(new EndGameScreen(game));
+                score.savetofile();
+                game.setScreen(new EndGameScreen(game, score.getScore(), true));
             }
             if(timer >= 5f) {
                 timer = 0f;

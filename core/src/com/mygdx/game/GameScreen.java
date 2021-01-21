@@ -18,7 +18,7 @@ public class GameScreen extends ScreenAdapter {
     Array<IComponent> enemyProjectiles = new Array<>();
     Array<IBonus> bonuses = new Array<>();
     SpriteBatch batch;
-    String nickname;
+    Score score;
 
     CollisionManager collisionManager;
     LvlManager lvlManager;
@@ -29,10 +29,10 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(AliensGame game, String nickname){
 
         this.game = game;
-        this.nickname = nickname;
-        this.spaceShip = new SpaceShip(new Texture("spaceship.png"),w/2 -128,0);
-        collisionManager = new CollisionManager(spaceShip,enemyShips,lasers,enemyProjectiles,bonuses);
-        lvlManager = new LvlManager(lasers,enemyShips,bonuses,game,nickname,spaceShip);
+        score = new Score(nickname);
+        spaceShip = new SpaceShip(new Texture("spaceship.png"),w/2 -128,0);
+        collisionManager = new CollisionManager(spaceShip,enemyShips,lasers,enemyProjectiles,bonuses,score);
+        lvlManager = new LvlManager(lasers,enemyShips,bonuses,game,nickname,spaceShip,score);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class GameScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(new InputAdapter(){
             public boolean keyDown(int keyCode){
                 if(keyCode == Input.Keys.ESCAPE) {
-                    game.setScreen(new EndGameScreen(game));
+                    game.setScreen(new EndGameScreen(game,score.getScore(),false));
                 }
                 return true;
             }
@@ -71,7 +71,8 @@ public class GameScreen extends ScreenAdapter {
         collisionManager.checkCollision();
 
         if(spaceShip.getHP()<=0){
-            game.setScreen(new EndGameScreen(game));
+            score.savetofile();
+            game.setScreen(new EndGameScreen(game, score.getScore(), false));
         }
 
         for(Iterator<IComponent> itr = enemyShips.iterator(); itr.hasNext(); ) {
