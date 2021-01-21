@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.GL20;
 
 public class EndGameScreen extends ScreenAdapter {
 
-    MyGdxGame game;
+    AliensGame game;
 
-    public EndGameScreen(MyGdxGame game){
+    public EndGameScreen(AliensGame game){
         this.game = game;
     }
 

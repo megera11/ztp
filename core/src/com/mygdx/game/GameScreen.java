@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
@@ -11,7 +10,7 @@ import java.util.Iterator;
 
 public class GameScreen extends ScreenAdapter {
 
-    MyGdxGame game;
+    AliensGame game;
     SpaceShip spaceShip;
     Texture laserTexture;
     Array<IComponent> enemyShips = new Array<>();
@@ -27,7 +26,7 @@ public class GameScreen extends ScreenAdapter {
     float w = Gdx.graphics.getWidth();
     float h = Gdx.graphics.getHeight();
 
-    public GameScreen(MyGdxGame game, String nickname){
+    public GameScreen(AliensGame game, String nickname){
 
         this.game = game;
         this.nickname = nickname;
@@ -66,11 +65,14 @@ public class GameScreen extends ScreenAdapter {
             spaceShip.move(10f,false);
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
-            Laser laser = new Laser(laserTexture, spaceShip.getxPosition() +spaceShip.getSize()/4, spaceShip.getyPosition(),false);
-            lasers.add(laser);
+            spaceShip.shoot(lasers,delta);
         }
         lvlManager.render(delta);
         collisionManager.checkCollision();
+
+        if(spaceShip.getHP()<=0){
+            game.setScreen(new EndGameScreen(game));
+        }
 
         for(Iterator<IComponent> itr = enemyShips.iterator(); itr.hasNext(); ) {
             IComponent b = itr.next();

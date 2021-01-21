@@ -7,13 +7,11 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 
-import java.util.Random;
-
 public class RankingScreen extends ScreenAdapter {
 
-    private MyGdxGame game;
+    private AliensGame game;
 
-    public RankingScreen(MyGdxGame game){
+    public RankingScreen(AliensGame game){
         this.game = game;
     }
 

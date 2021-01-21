@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 public class MenuScreen extends ScreenAdapter {
-    MyGdxGame game;
+    AliensGame game;
     TextButton newgamebutton;
     TextButton rankingbutton;
     TextButton exitbutton;
@@ -23,7 +23,7 @@ public class MenuScreen extends ScreenAdapter {
     TextureAtlas buttonAtlas;
     Stage stage;
 
-    public MenuScreen(MyGdxGame game){
+    public MenuScreen(AliensGame game){
         this.game = game;
     }
 
@@ -43,9 +43,9 @@ public class MenuScreen extends ScreenAdapter {
         newgamebutton = new TextButton("New Game", style);
         rankingbutton = new TextButton("Leader", style);
         exitbutton = new TextButton("Exit", style);
-        newgamebutton.setPosition((1280 - newgamebutton.getWidth())/2, 400);
-        rankingbutton.setPosition((1280 - rankingbutton.getWidth())/2, 350);
-        exitbutton.setPosition((1280 - exitbutton.getWidth())/2, 300);
+        newgamebutton.setPosition((Gdx.graphics.getWidth() - newgamebutton.getWidth())/2, 400);
+        rankingbutton.setPosition((Gdx.graphics.getWidth() - rankingbutton.getWidth())/2, 350);
+        exitbutton.setPosition((Gdx.graphics.getWidth() - exitbutton.getWidth())/2, 300);
 
         newgamebutton.addListener(new ChangeListener() {
             @Override
@@ -62,7 +62,7 @@ public class MenuScreen extends ScreenAdapter {
         exitbutton.addListener(new ChangeListener() {
             @Override
             public void changed (ChangeEvent event, Actor actor) {
-                System.exit(0);
+                Gdx.app.exit();
             }
         });
 
@@ -77,7 +77,7 @@ public class MenuScreen extends ScreenAdapter {
         game.batch.begin();
         game.batch.draw(new Texture("background.png"),0,0);
         Texture texture = new Texture("Logo.png");
-        game.batch.draw(texture, (1280-texture.getWidth())/2,550);
+        game.batch.draw(texture, (Gdx.graphics.getWidth()-texture.getWidth())/2,550);
         newgamebutton.draw(game.batch, 1);
         rankingbutton.draw(game.batch, 1);
         exitbutton.draw(game.batch, 1);

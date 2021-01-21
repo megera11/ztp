@@ -1,16 +1,14 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 
 public class LvlManager {
 
-    private MyGdxGame game;
+    private AliensGame game;
     private float timer;
     private SpaceShip spaceShip;
     private String nickname;
-    private int score;
     private Array<IComponent> lasers;
     private Array<IComponent> enemies;
     private Array<IBonus> bonuses;
@@ -19,7 +17,7 @@ public class LvlManager {
     private LevelBuilderDirector director = new LevelBuilderDirector();
     Array<IComponent> components = new Array<>();
 
-    public LvlManager(Array<IComponent> lasers, Array<IComponent> enemies, Array<IBonus> bonuses, MyGdxGame game, String nickname, SpaceShip spaceShip){
+    public LvlManager(Array<IComponent> lasers, Array<IComponent> enemies, Array<IBonus> bonuses, AliensGame game, String nickname, SpaceShip spaceShip){
         this.lasers = lasers;
         this.enemies = enemies;
         this.game = game;
@@ -34,6 +32,9 @@ public class LvlManager {
         timer += Gdx.graphics.getDeltaTime();
 
         if(enemies.size == 0 && buildinprogress==false){
+            if(currentLevel==4){
+                game.setScreen(new EndGameScreen(game));
+            }
             if(timer >= 5f) {
                 timer = 0f;
                 this.buildinprogress = true;

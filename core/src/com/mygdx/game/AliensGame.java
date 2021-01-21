@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Array;
 
 import java.util.Iterator;
 
-public class MyGdxGame extends Game {
+public class AliensGame extends Game {
 	SpriteBatch batch;
 	BitmapFont font;
 
@@ -22,9 +22,5 @@ public class MyGdxGame extends Game {
 		font = new BitmapFont();
 		setScreen(new MenuScreen(this));
 	}
-
-
-
-
 
 }

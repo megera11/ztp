@@ -26,13 +26,14 @@ public class CollisionManager {
 
     public void checkCollision() {
 
-        checkPlayerLaserShipCollision();
-        checkEnemyProjectilesCollision();
+        checkPlayerProjectilesShipCollision();
+        checkEnemyProjectilesCollisions();
+        checkPlayerProjectileCollisions();
         checkBonusCollision();
     }
 
 
-    private void checkPlayerLaserShipCollision() {
+    private void checkPlayerProjectilesShipCollision() {
         iterComp = enemyShips.iterator();
 
         while (iterComp.hasNext()) {
@@ -78,7 +79,7 @@ public class CollisionManager {
         }
     }
 
-    private void checkEnemyProjectilesCollision() {
+    private void checkEnemyProjectilesCollisions() {
         iterComp = enemyProjectiles.iterator();
 
         while (iterComp.hasNext()) {
@@ -94,10 +95,19 @@ public class CollisionManager {
                         Gdx.app.log("Bomb", " Hit by laser");
                         iterLas.remove();
                         iterComp.remove();
+
                     }
                 }
             }
 
+        }
+    }
+
+    private void checkPlayerProjectileCollisions(){
+        iterComp = enemyProjectiles.iterator();
+
+        while (iterComp.hasNext()) {
+            IComponent enemyProjectile = iterComp.next();
 
             if (enemyProjectile.getSprite().getBoundingRectangle().overlaps(spaceShip.getSprite().getBoundingRectangle())) {
                 Gdx.app.log("Player", " Hit by projectile");
@@ -107,4 +117,5 @@ public class CollisionManager {
             }
         }
     }
+
 }
