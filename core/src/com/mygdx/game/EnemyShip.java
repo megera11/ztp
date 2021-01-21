@@ -19,9 +19,9 @@ public class EnemyShip extends Ship {
     }
 
     public void update() {
-        moveStrategy.move(spriteSpaceShip);
-        yPosition = spriteSpaceShip.getY();
-        xPosition = spriteSpaceShip.getX();
+        moveStrategy.move(spriteShip);
+        yPosition = spriteShip.getY();
+        xPosition = spriteShip.getX();
     }
 
     public void shoot(Array<IComponent> enemyProjectiles) {
@@ -31,7 +31,7 @@ public class EnemyShip extends Ship {
         if (timer >= shootingInterval && yPosition < Gdx.graphics.getHeight() && yPosition > 0) {
 
             timer = 0f;
-            Laser laser = new Laser(laserTexture, xPosition + spriteSpaceShip.getHeight() / 4, yPosition, true);
+            Laser laser = new Laser(laserTexture, xPosition + spriteShip.getHeight() / 4, yPosition, true);
             enemyProjectiles.add(laser);
             Gdx.app.log("LightEnemy", "Shoot");
 

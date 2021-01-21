@@ -5,26 +5,51 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 
 public class BossEnemy extends EnemyShip{
-
-
-    public BossEnemy(Texture texture, float xPosition, float yPosition, IMoveStrategy moveStrategy){
+    private SpaceShip spaceShip;
+    private float timer1=0;
+    private float timer2=0;
+    private int HP;
+    public BossEnemy(Texture texture, float xPosition, float yPosition, IMoveStrategy moveStrategy,SpaceShip spaceShip){
         super(texture,xPosition,yPosition, moveStrategy);
+        HP=20;
+        this.spaceShip=spaceShip;
     }
 
     public void update(){
-        moveStrategy.move(spriteSpaceShip);
-        xPosition = spriteSpaceShip.getX();
-        yPosition = spriteSpaceShip.getY();
+        moveStrategy.move(spriteShip);
+        xPosition = spriteShip.getX();
+        yPosition = spriteShip.getY();
     }
 
-    public void shoot(Array<IComponent> laserArray){
+    public void shoot(Array<IComponent> enemyProjectiles){
 
-        timer += Gdx.graphics.getDeltaTime();
-        if(timer >= 3f) {
+        timer1 += Gdx.graphics.getDeltaTime();
+        timer2 += Gdx.graphics.getDeltaTime();
+        if(timer1 >= 1f) {
 
-            timer = 0f;
-            laserArray.add(new Laser(laserTexture, xPosition +spriteSpaceShip.getHeight()/4, yPosition,true));
-            Gdx.app.log("shoot", " Hit");
+            timer1 = 0f;
+            enemyProjectiles.add(new Laser(laserTexture, xPosition + spriteShip.getHeight()/4, yPosition,true));
+            Gdx.app.log("Boss", " shoot");
+
         }
+        if(timer2 >= 2.5f) {
+
+            timer2 = 0f;
+            GuidedTorpedo torpedo = new GuidedTorpedo(spaceShip, missileTexture,xPosition,yPosition);
+            enemyProjectiles.add(torpedo);
+            spaceShip.register(torpedo);
+
+        }
+
+
+
+    }
+
+    public void damage(int dmg){
+        HP = HP -dmg;
+    }
+
+    public int getHP(){
+        return HP;
     }
 }

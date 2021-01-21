@@ -28,6 +28,7 @@ public class Bonus implements IComponent,IBonus{
 
    public void update(){
         moveStrategy.move(spriteBonus);
+        moveStrategy.move(spriteBonus);
         yPosition = spriteBonus.getY();
         xPosition = spriteBonus.getX();
    }

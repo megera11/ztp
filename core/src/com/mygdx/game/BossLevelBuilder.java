@@ -10,10 +10,10 @@ public class BossLevelBuilder implements ILevelBuilder{
     public BossEnemy bossEnemy;
     Texture texture = new Texture("Boss.png");
 
-    public BossLevelBuilder() {
+    public void BuildLvl(SpaceShip spaceShip) {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-        bossEnemy = new BossEnemy(texture, w / 2, 700, new BossMovingStrategy());
+        bossEnemy = new BossEnemy(texture, w / 2, 700, new BossMovingStrategy(),spaceShip);
         enemyShips.add(bossEnemy);
     }
 

@@ -11,16 +11,17 @@ public class EnemyBomber extends EnemyShip{
 
     public EnemyBomber(Texture texture, float xPosition, float yPosition, IMoveStrategy moveStrategy, SpaceShip spaceShip){
         super(texture,xPosition,yPosition, moveStrategy);
-        this.shootingInterval = 3;
+        this.shootingInterval = 9;
         this.spaceShip = spaceShip;
         careTaker = new Caretaker();
+        timer=9;
     }
 
     @Override
     public void shoot(Array<IComponent> enemyProjectiles){
 
         timer += Gdx.graphics.getDeltaTime();
-        if(timer >= shootingInterval) {
+        if(timer >= shootingInterval && xPosition < Gdx.graphics.getWidth() && xPosition > 0) {
 
             timer = 0f;
             GuidedTorpedo torpedo = new GuidedTorpedo(spaceShip, missileTexture,xPosition,yPosition);
@@ -35,9 +36,9 @@ public class EnemyBomber extends EnemyShip{
 
 
 
-            moveStrategy.move(spriteSpaceShip);
-            yPosition = spriteSpaceShip.getY();
-            xPosition = spriteSpaceShip.getX();
+            moveStrategy.move(spriteShip);
+            yPosition = spriteShip.getY();
+            xPosition = spriteShip.getX();
 
     }
 

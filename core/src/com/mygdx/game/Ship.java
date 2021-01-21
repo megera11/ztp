@@ -5,15 +5,15 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Ship implements IComponent {
-     Sprite spriteSpaceShip;
+     Sprite spriteShip;
      Texture texture;
      float xPosition;
      float yPosition;
 
     public Ship(Texture texture, float xPosition, float yPosition){
         this.texture = texture;
-        this.spriteSpaceShip =new Sprite(texture);
-        this.spriteSpaceShip.setPosition(xPosition,yPosition);
+        this.spriteShip =new Sprite(texture);
+        this.spriteShip.setPosition(xPosition,yPosition);
 
         this.xPosition = xPosition;
         this.yPosition = yPosition;
@@ -25,7 +25,7 @@ public class Ship implements IComponent {
     }
 
     public void draw(Batch batch){
-        spriteSpaceShip.draw(batch);
+        spriteShip.draw(batch);
     }
 
     public void update(){};
@@ -39,7 +39,7 @@ public class Ship implements IComponent {
     }
 
     public Sprite getSprite(){
-        return spriteSpaceShip;
+        return spriteShip;
     }
 
     public void setPosition(float xPosition,float yPosition){
@@ -48,7 +48,7 @@ public class Ship implements IComponent {
     }
 
     public float getSize(){
-        return spriteSpaceShip.getHeight();
+        return spriteShip.getHeight();
     }
 
     public void dispose(){

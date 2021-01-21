@@ -46,6 +46,10 @@ public class CollisionManager {
                 if (laser.getSprite().getBoundingRectangle().overlaps(enemyShip.getSprite().getBoundingRectangle())) {
                     Gdx.app.log("Enemy", " Hit by laser");
                     iterLas.remove();
+                    if(enemyShip instanceof BossEnemy && ((BossEnemy) enemyShip).getHP() > 0){
+                        ((BossEnemy) enemyShip).damage(1);
+                        return;
+                    }
                     iterComp.remove();
                 }
             }
