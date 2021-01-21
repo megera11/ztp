@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.utils.Array;
 
 public class Ship implements IComponent {
      Sprite spriteShip;
@@ -20,7 +21,11 @@ public class Ship implements IComponent {
     }
 
 
-    public void shot(){
+    public void shoot(Array<IComponent> lasers, float deltaTime){
+
+    }
+
+    public void shoot(Array<IComponent> enemyProjectiles){
 
     }
 

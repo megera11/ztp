@@ -108,6 +108,7 @@ public class CollisionManager {
                     if (laser.getSprite().getBoundingRectangle().overlaps(enemyProjectile.getSprite().getBoundingRectangle())) {
                         Gdx.app.log("Bomb", " Hit by laser");
                         iterLas.remove();
+                        spaceShip.unregister((GuidedTorpedo)enemyProjectile);
                         iterComp.remove();
 
                     }
